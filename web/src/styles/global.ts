@@ -50,6 +50,7 @@ export const GlobalStyle = createGlobalStyle`
     textarea,
     button {
         font: 500 1.6rem Poppins;
+        color: var(--color-text-base);
     }
 
     .container {

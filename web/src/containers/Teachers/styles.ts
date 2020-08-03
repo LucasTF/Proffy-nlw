@@ -50,6 +50,11 @@ export const Container = styled.main`
 		}
 	}
 
+	section {
+		margin: 3.2rem auto;
+		width: 90%;
+	}
+
 	@media (min-width: 700px) {
 		header {
 			#search-teachers {
@@ -65,6 +70,11 @@ export const Container = styled.main`
 					}
 				}
 			}
+		}
+
+		section {
+			padding: 3.2rem 0;
+			max-width: 740px;
 		}
 	}
 `;

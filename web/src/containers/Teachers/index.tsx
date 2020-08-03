@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container } from './styles';
 import PageHeader from '../../components/PageHeader';
+import TeacherCard from '../../components/TeacherCard';
 
 const Teachers: React.FC = () => {
 	return (
@@ -24,6 +25,12 @@ const Teachers: React.FC = () => {
 					</div>
 				</form>
 			</PageHeader>
+
+			<section>
+				<TeacherCard />
+				<TeacherCard />
+				<TeacherCard />
+			</section>
 		</Container>
 	);
 };
