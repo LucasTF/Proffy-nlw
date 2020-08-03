@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -20,14 +21,14 @@ export default function Home() {
 				<img src={HomeImg} alt='Home' className='home-image' />
 
 				<div className='buttons-container'>
-					<a href='#' className='study'>
+					<Link to='/study' className='study'>
 						<img src={StudyIcon} alt='Estudar' />
 						Estudar
-					</a>
-					<a href='#' className='give-classes'>
+					</Link>
+					<Link to='/give-classes' className='give-classes'>
 						<img src={GiveClassesIcon} alt='Dar Aulas' />
 						Dar Aulas
-					</a>
+					</Link>
 				</div>
 
 				<span className='total-connections'>
