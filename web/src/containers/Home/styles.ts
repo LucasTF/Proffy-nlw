@@ -71,6 +71,7 @@ export const Container = styled.main`
 
 			img {
 				width: 4rem;
+				margin-right: 2.4rem;
 			}
 		}
 	}
@@ -84,6 +85,56 @@ export const Container = styled.main`
 
 		img {
 			margin-left: 0.8rem;
+		}
+	}
+
+	@media (min-width: 1100px) {
+		#home-page-content {
+			max-width: 1100px;
+
+			display: grid;
+			grid-template-rows: 350px 1fr;
+			grid-template-columns: 2fr 1fr 1fr;
+
+			grid-template-areas:
+				'logo home-img home-img'
+				'buttons buttons total';
+		}
+
+		.logo-container {
+			grid-area: logo;
+			align-self: center;
+			text-align: left;
+			margin: 0;
+
+			h2 {
+				text-align: initial;
+				font-size: 3.6rem;
+			}
+
+			img {
+				height: 100%;
+			}
+		}
+
+		.home-image {
+			grid-area: home-img;
+			justify-self: end;
+		}
+
+		.buttons-container {
+			grid-area: buttons;
+
+			justify-content: flex-start;
+
+			a {
+				font-size: 2.4rem;
+			}
+		}
+
+		.total-connections {
+			grid-area: total;
+			justify-self: flex-end;
 		}
 	}
 `;
