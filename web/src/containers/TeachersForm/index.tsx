@@ -1,10 +1,13 @@
 import React from 'react';
+import PageHeader from '../../components/PageHeader';
+
+import { Container } from './styles';
 
 const TeachersForm: React.FC = () => {
 	return (
-		<div>
-			<h1>Teachers Form</h1>
-		</div>
+		<Container>
+			<PageHeader title='Que incrível que você quer dar aulas!' />
+		</Container>
 	);
 };
 
