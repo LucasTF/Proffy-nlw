@@ -36,6 +36,10 @@ export const Container = styled.main`
 				padding-bottom: 1.6rem;
 				border-bottom: 1px solid var(--color-line-in-white);
 			}
+
+			div + div {
+				margin-top: 2.4rem;
+			}
 		}
 
 		footer {
