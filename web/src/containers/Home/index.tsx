@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
@@ -8,8 +8,19 @@ import HomeImg from '../../assets/images/landing.svg';
 import StudyIcon from '../../assets/images/icons/study.svg';
 import GiveClassesIcon from '../../assets/images/icons/give-classes.svg';
 import ConectionsIcon from '../../assets/images/icons/purple-heart.svg';
+import api from '../../utils/api';
 
 export default function Home() {
+	const [connections, setConnections] = useState(0);
+
+	useEffect(() => {
+		api.get('connections')
+			.then(res => {
+				setConnections(res.data.total);
+			})
+			.catch(err => console.log(err));
+	}, []);
+
 	return (
 		<Container>
 			<div id='home-page-content' className='container'>
@@ -32,7 +43,7 @@ export default function Home() {
 				</div>
 
 				<span className='total-connections'>
-					Total de 200 conexões já realizadas
+					Total de {connections} conexões já realizadas
 					<img src={ConectionsIcon} alt='Conexões' />
 				</span>
 			</div>
