@@ -3,26 +3,18 @@ import React from 'react';
 import { Container } from './styles';
 import PageHeader from '../../components/PageHeader';
 import TeacherCard from '../../components/TeacherCard';
+import Input from '../../components/Input';
 
 const Teachers: React.FC = () => {
 	return (
 		<Container>
 			<PageHeader title='Estes são os proffys disponíveis.'>
 				<form id='search-teachers'>
-					<div className='input-block'>
-						<label htmlFor='subject'>Matéria</label>
-						<input type='text' id='subject' />
-					</div>
+					<Input name='subject' label='Matéria' />
 
-					<div className='input-block'>
-						<label htmlFor='week-day'>Dia da semana</label>
-						<input type='text' id='week-day' />
-					</div>
+					<Input name='week-day' label='Dia da semana' />
 
-					<div className='input-block'>
-						<label htmlFor='time'>Horário</label>
-						<input type='text' id='time' />
-					</div>
+					<Input name='time' label='Horario' type='time' />
 				</form>
 			</PageHeader>
 
