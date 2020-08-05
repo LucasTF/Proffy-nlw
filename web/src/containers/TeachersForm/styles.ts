@@ -29,12 +29,37 @@ export const Container = styled.main`
 				font: 700 2.4rem Archivo;
 				color: var(--color-text-title);
 				margin: 2.4rem 0;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
 				width: 100%;
 				padding-bottom: 1.6rem;
 				border-bottom: 1px solid var(--color-line-in-white);
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+
+				button {
+					float: right;
+					background: none;
+					border: none;
+					color: var(--color-primary);
+					cursor: pointer;
+					font: 700 1.6rem Archivo;
+					transition: color 0.2s;
+
+					&:hover {
+						color: var(--color-primary-dark);
+					}
+				}
+			}
+
+			.schedule-item {
+				display: grid;
+				grid-template-columns: 2fr 1fr 1fr;
+				column-gap: 1.6rem;
+
+				div + div {
+					margin-top: 0;
+				}
 			}
 
 			div + div {

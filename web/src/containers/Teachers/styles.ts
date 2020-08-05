@@ -11,6 +11,10 @@ export const Container = styled.main`
 			label {
 				color: var(--color-text-in-primary);
 			}
+
+			div + div {
+				margin-top: 1.4rem;
+			}
 		}
 	}
 
@@ -27,6 +31,10 @@ export const Container = styled.main`
 				column-gap: 16px;
 				position: absolute;
 				bottom: -28px;
+
+				div + div {
+					margin-top: 0;
+				}
 			}
 		}
 
