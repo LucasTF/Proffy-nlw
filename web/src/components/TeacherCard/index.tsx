@@ -3,33 +3,56 @@ import React from 'react';
 import { Container } from './styles';
 
 import WhatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import api from '../../utils/api';
 
-const TeacherCard: React.FC = () => {
+interface ITeacherCardProps {
+	id: number;
+	name: string;
+	whatsapp: string;
+	avatar: string;
+	subject: string;
+	bio: string;
+	cost: string;
+}
+
+const TeacherCard: React.FC<ITeacherCardProps> = ({
+	id,
+	name,
+	avatar,
+	whatsapp,
+	subject,
+	bio,
+	cost,
+}) => {
+	function createConnectionHandler() {
+		api.post('connections', {
+			user_id: id,
+		});
+	}
+
 	return (
 		<Container>
 			<header>
-				<img
-					src='https://media-exp1.licdn.com/dms/image/C4D03AQGblUurz886vg/profile-displayphoto-shrink_200_200/0?e=1602115200&v=beta&t=lLhsVOgXlbBmaYskrUbSC9leV9qZEWaGYt9AmiG97Y8'
-					alt='Lucas Ferreira'
-				/>
+				<img src={avatar} alt={name} />
 				<div>
-					<strong>Lucas Ferreira</strong>
-					<span>Programação TypeScript</span>
+					<strong>{name}</strong>
+					<span>{subject}</span>
 				</div>
 			</header>
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-				molestiae rerum officiis eum. Ratione, illo optio omnis
-				consequatur nulla ab.
-			</p>
+			<p>{bio}</p>
 			<footer>
 				<p>
-					Preço/hora <strong>R$ 50,00</strong>
+					Preço/hora <strong>R$ {cost}</strong>
 				</p>
-				<button type='button'>
+				<a
+					target='_blank'
+					rel='noopener noreferrer'
+					onClick={createConnectionHandler}
+					href={`https://wa.me/${whatsapp}`}
+				>
 					<img src={WhatsappIcon} alt='Whatsapp' />
 					Entrar em contato
-				</button>
+				</a>
 			</footer>
 		</Container>
 	);

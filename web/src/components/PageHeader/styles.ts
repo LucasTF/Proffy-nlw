@@ -48,13 +48,13 @@ export const Container = styled.header`
 	@media (min-width: 700px) {
 		height: 340px;
 
-		.top-bar-contianer {
+		.top-bar-container {
 			max-width: 1100px;
 		}
 
 		.header-content {
 			flex: 1;
-			max-width: 740px;
+			max-width: 900px;
 			margin: 0 auto;
 			padding-bottom: 48px;
 			display: flex;

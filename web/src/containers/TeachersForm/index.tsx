@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 
@@ -16,6 +18,8 @@ interface ISchedule {
 }
 
 const TeachersForm: React.FC = () => {
+	const history = useHistory();
+
 	const [name, setName] = useState('');
 	const [avatar, setAvatar] = useState('');
 	const [whatsapp, setWhatsapp] = useState('');
@@ -64,6 +68,7 @@ const TeachersForm: React.FC = () => {
 		})
 			.then(() => {
 				alert('Cadastro realizado com sucesso!');
+				history.push('/');
 			})
 			.catch(err => {
 				alert('Erro ao tentar realizar cadastro!');
