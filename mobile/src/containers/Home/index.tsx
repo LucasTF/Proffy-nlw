@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import * as Styled from './styles';
 
@@ -9,6 +10,12 @@ import GiveClassesIcon from '../../assets/images/icons/give-classes.png';
 import HeartIcon from '../../assets/images/icons/heart.png';
 
 const Home: React.FC = () => {
+	const navigation = useNavigation();
+
+	function NavToGiveClassesHandler() {
+		navigation.navigate('GiveClasses');
+	}
+
 	return (
 		<Styled.Container>
 			<Styled.Banner resizeMode='contain' source={LandingImg} />
@@ -24,7 +31,7 @@ const Home: React.FC = () => {
 					<Styled.ButtonText>Estudar</Styled.ButtonText>
 				</Styled.Button>
 
-				<Styled.Button>
+				<Styled.Button onPress={NavToGiveClassesHandler}>
 					<Image source={GiveClassesIcon} />
 					<Styled.ButtonText>Dar aulas</Styled.ButtonText>
 				</Styled.Button>

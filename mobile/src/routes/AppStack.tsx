@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../containers/Home';
+import GiveClasses from '../containers/GiveClasses';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -11,6 +12,7 @@ const AppStack: React.FC = () => {
 		<NavigationContainer>
 			<Navigator screenOptions={{ headerShown: false }}>
 				<Screen name='Home' component={Home} />
+				<Screen name='GiveClasses' component={GiveClasses} />
 			</Navigator>
 		</NavigationContainer>
 	);
