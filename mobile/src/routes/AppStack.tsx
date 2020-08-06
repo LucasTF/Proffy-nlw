@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../containers/Home';
 import GiveClasses from '../containers/GiveClasses';
+import StudyTabs from './StudyTabs';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -13,6 +14,7 @@ const AppStack: React.FC = () => {
 			<Navigator screenOptions={{ headerShown: false }}>
 				<Screen name='Home' component={Home} />
 				<Screen name='GiveClasses' component={GiveClasses} />
+				<Screen name='Study' component={StudyTabs} />
 			</Navigator>
 		</NavigationContainer>
 	);

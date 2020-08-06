@@ -12,6 +12,10 @@ import HeartIcon from '../../assets/images/icons/heart.png';
 const Home: React.FC = () => {
 	const navigation = useNavigation();
 
+	function NavToStudyHandler() {
+		navigation.navigate('Study');
+	}
+
 	function NavToGiveClassesHandler() {
 		navigation.navigate('GiveClasses');
 	}
@@ -26,7 +30,7 @@ const Home: React.FC = () => {
 			</Styled.Title>
 
 			<Styled.ButtonContainer>
-				<Styled.Button primary>
+				<Styled.Button onPress={NavToStudyHandler} primary>
 					<Image source={StudyIcon} />
 					<Styled.ButtonText>Estudar</Styled.ButtonText>
 				</Styled.Button>
