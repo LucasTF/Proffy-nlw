@@ -12,7 +12,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { AppLoading } from 'expo';
 
-import Home from './src/containers/Home';
+import AppStack from './src/routes/AppStack';
 
 export default function App() {
 	let [fontsLoaded] = useFonts({
@@ -27,7 +27,7 @@ export default function App() {
 	} else {
 		return (
 			<>
-				<Home />
+				<AppStack />
 				<StatusBar style='light' />
 			</>
 		);
