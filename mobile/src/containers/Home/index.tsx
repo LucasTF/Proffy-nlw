@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import api from '../../utils/api';
 
 import * as Styled from './styles';
 
@@ -11,6 +13,16 @@ import HeartIcon from '../../assets/images/icons/heart.png';
 
 const Home: React.FC = () => {
 	const navigation = useNavigation();
+
+	const [connections, setConnections] = useState(0);
+
+	useEffect(() => {
+		api.get('connections')
+			.then(res => {
+				setConnections(res.data.total);
+			})
+			.catch(err => console.log(err));
+	}, []);
 
 	function NavToStudyHandler() {
 		navigation.navigate('Study');
@@ -42,7 +54,8 @@ const Home: React.FC = () => {
 			</Styled.ButtonContainer>
 
 			<Styled.TotalConnText>
-				Total de 255 conexões já realizadas <Image source={HeartIcon} />
+				Total de {connections} conexões já realizadas{' '}
+				<Image source={HeartIcon} />
 			</Styled.TotalConnText>
 		</Styled.Container>
 	);
