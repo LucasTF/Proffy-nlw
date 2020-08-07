@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { Image } from 'react-native';
@@ -10,9 +10,14 @@ import * as Styled from './styles';
 
 interface IPageHeaderProps {
 	title: string;
+	headerRight?: ReactNode;
 }
 
-const PageHeader: React.FC<IPageHeaderProps> = ({ title }) => {
+const PageHeader: React.FC<IPageHeaderProps> = ({
+	title,
+	headerRight,
+	children,
+}) => {
 	const navigation = useNavigation();
 
 	function navBackHandler() {
@@ -22,14 +27,20 @@ const PageHeader: React.FC<IPageHeaderProps> = ({ title }) => {
 	return (
 		<Styled.Container>
 			<Styled.TopBar>
-				<BorderlessButton onPress={navBackHandler}>
+				<Styled.FilterButton onPress={navBackHandler}>
 					<Image source={GoBackImage} resizeMode='contain' />
-				</BorderlessButton>
+				</Styled.FilterButton>
 
 				<Image source={LogoImage} resizeMode='contain' />
 			</Styled.TopBar>
 
-			<Styled.Title>{title}</Styled.Title>
+			<Styled.TextContainer>
+				<Styled.Title>{title}</Styled.Title>
+
+				{headerRight}
+			</Styled.TextContainer>
+
+			{children}
 		</Styled.Container>
 	);
 };

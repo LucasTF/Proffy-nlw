@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
 	padding: 60px 40px;
@@ -6,6 +7,12 @@ export const Container = styled.View`
 `;
 
 export const TopBar = styled.View`
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+export const TextContainer = styled.View`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
@@ -19,3 +26,5 @@ export const Title = styled.Text`
 	max-width: 160px;
 	margin: 20px 0 40px 0;
 `;
+
+export const FilterButton = styled(BorderlessButton)``;
