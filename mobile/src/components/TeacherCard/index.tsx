@@ -1,38 +1,52 @@
 import React from 'react';
+import { Image, Linking } from 'react-native';
 
 import HeartIcon from '../../assets/images/icons/heart-outline.png';
 import UnfavoriteIcon from '../../assets/images/icons/unfavorite.png';
 import WhatsappIcon from '../../assets/images/icons/whatsapp.png';
 
 import * as Styled from './styles';
-import { Image } from 'react-native';
 
-const TeacherCard: React.FC = () => {
+interface ITeacherProps {
+	id: number;
+	name: string;
+	avatar: string;
+	subject: string;
+	bio: string;
+	whatsapp: string;
+	cost: string;
+}
+
+const TeacherCard: React.FC<ITeacherProps> = ({
+	id,
+	name,
+	avatar,
+	subject,
+	bio,
+	whatsapp,
+	cost,
+}) => {
+	function whatsappHandler() {
+		Linking.openURL(`whatsapp://send?phone=+55${whatsapp}`);
+	}
+
 	return (
 		<Styled.Container>
 			<Styled.Profile>
-				<Styled.Avatar
-					source={{ uri: 'https://github.com/LucasTF.png' }}
-				/>
+				<Styled.Avatar source={{ uri: avatar }} />
 
 				<Styled.ProfileInfo>
-					<Styled.ProfileName>Lucas Ferreira</Styled.ProfileName>
-					<Styled.ProfileSubject>Programação</Styled.ProfileSubject>
+					<Styled.ProfileName>{name}</Styled.ProfileName>
+					<Styled.ProfileSubject>{subject}</Styled.ProfileSubject>
 				</Styled.ProfileInfo>
 			</Styled.Profile>
 
-			<Styled.ProfileBio>
-				Lorem ipsum dolor.
-				{'\n'}
-				{'\n'}
-				Sit amet consectetur, adipisicing elit. Repudiandae, iure velit?
-				Recusandae neque a non porro pariatur!
-			</Styled.ProfileBio>
+			<Styled.ProfileBio>{bio}</Styled.ProfileBio>
 
 			<Styled.Footer>
 				<Styled.Price>
 					Preço/Hora {'   '}
-					<Styled.Value>R$ 50.00</Styled.Value>
+					<Styled.Value>R$ {cost}</Styled.Value>
 				</Styled.Price>
 
 				<Styled.ButtonsContainer>
@@ -40,7 +54,7 @@ const TeacherCard: React.FC = () => {
 						<Image source={HeartIcon} />
 					</Styled.FavoriteButton>
 
-					<Styled.ContactButton>
+					<Styled.ContactButton onPress={whatsappHandler}>
 						<Image source={WhatsappIcon} />
 						<Styled.ContactButtonText>
 							Entrar em contato
