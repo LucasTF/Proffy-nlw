@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Linking } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import HeartIcon from '../../assets/images/icons/heart-outline.png';
 import UnfavoriteIcon from '../../assets/images/icons/unfavorite.png';
 import WhatsappIcon from '../../assets/images/icons/whatsapp.png';
 
 import * as Styled from './styles';
+import api from '../../utils/api';
 
-interface ITeacherProps {
+export interface ITeacher {
 	id: number;
 	name: string;
 	avatar: string;
@@ -15,9 +17,10 @@ interface ITeacherProps {
 	bio: string;
 	whatsapp: string;
 	cost: string;
+	favorited: boolean;
 }
 
-const TeacherCard: React.FC<ITeacherProps> = ({
+const TeacherCard: React.FC<ITeacher> = ({
 	id,
 	name,
 	avatar,
@@ -25,8 +28,47 @@ const TeacherCard: React.FC<ITeacherProps> = ({
 	bio,
 	whatsapp,
 	cost,
+	favorited,
 }) => {
+	const [isFavorited, setIsFavorited] = useState(favorited);
+
+	async function toggleFavoriteHandler() {
+		const favorites = await AsyncStorage.getItem('favorites');
+
+		let favArr: Array<ITeacher> = [];
+		if (favorites) favArr = JSON.parse(favorites);
+
+		if (isFavorited) {
+			const favIndex = favArr.findIndex((teacher: ITeacher) => {
+				return teacher.id === id;
+			});
+
+			favArr.splice(favIndex, 1);
+
+			setIsFavorited(false);
+		} else {
+			favArr.push({
+				id,
+				name,
+				avatar,
+				subject,
+				bio,
+				whatsapp,
+				cost,
+				favorited: true,
+			});
+
+			setIsFavorited(true);
+		}
+
+		await AsyncStorage.setItem('favorites', JSON.stringify(favArr));
+	}
+
 	function whatsappHandler() {
+		api.post('connections', {
+			user_id: id,
+		});
+
 		Linking.openURL(`whatsapp://send?phone=+55${whatsapp}`);
 	}
 
@@ -50,8 +92,15 @@ const TeacherCard: React.FC<ITeacherProps> = ({
 				</Styled.Price>
 
 				<Styled.ButtonsContainer>
-					<Styled.FavoriteButton>
-						<Image source={HeartIcon} />
+					<Styled.FavoriteButton
+						favorite={isFavorited}
+						onPress={toggleFavoriteHandler}
+					>
+						{isFavorited ? (
+							<Image source={UnfavoriteIcon} />
+						) : (
+							<Image source={HeartIcon} />
+						)}
 					</Styled.FavoriteButton>
 
 					<Styled.ContactButton onPress={whatsappHandler}>

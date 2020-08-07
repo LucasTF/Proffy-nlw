@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 interface IFavoriteButton {
-	favorite?: boolean;
+	favorite: boolean;
 }
 
 export const Container = styled.View`
