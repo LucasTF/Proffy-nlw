@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 
 import RegistrationService from '../services/RegistrationService';
-import LoginService from '../services/LoginService';
+import AuthService from '../services/AuthService';
 
 export default class AuthController {
-	loginService: LoginService;
+	authService: AuthService;
 	registrationService: RegistrationService;
 
 	constructor() {
-		this.loginService = new LoginService();
+		this.authService = new AuthService();
 		this.registrationService = new RegistrationService();
 	}
 
@@ -16,11 +16,21 @@ export default class AuthController {
 		return res.status(200).json(req.user);
 	}
 
-	login(req: Request, res: Response) {
-		this.loginService.login(req, res);
+	async login(req: Request, res: Response) {
+		const auth = await this.authService.login(req.body);
+
+		if (auth.response)
+			return res.status(auth.statusCode).json(auth.response);
+
+		return res.sendStatus(auth.statusCode);
 	}
 
-	create(req: Request, res: Response) {
-		this.registrationService.register(req, res);
+	async create(req: Request, res: Response) {
+		const register = await this.registrationService.register(req.body);
+
+		if (register.response)
+			return res.status(register.statusCode).json(register.response);
+
+		return res.sendStatus(register.statusCode);
 	}
 }

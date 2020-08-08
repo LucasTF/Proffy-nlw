@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 
 import db from '../database/connection';
+import IServiceResponse from '../utils/serviceResponse';
 
-interface IRegister {
+interface IAccount {
 	name: string;
 	surname: string;
 	email: string;
@@ -11,14 +11,17 @@ interface IRegister {
 }
 
 export default class RegistrationService {
-	async register(req: Request, res: Response) {
-		const account: IRegister = req.body;
+	async register(account: IAccount): Promise<IServiceResponse> {
 		const isEmailUsed = await db('users').where({ email: account.email });
 		if (isEmailUsed[0]) {
-			return res.status(403).json({
-				error: 'email',
-				message: 'Esse email já está em uso.',
-			});
+			return {
+				failed: true,
+				statusCode: 401,
+				response: {
+					error: 'email',
+					message: 'Esse email já está em uso.',
+				},
+			};
 		}
 		try {
 			const salt = await bcrypt.genSalt();
@@ -33,10 +36,10 @@ export default class RegistrationService {
 					'https://wdeapc.com/wp-content/uploads/2016/01/user-placeholder.png',
 			});
 
-			return res.status(201).send();
+			return { failed: false, statusCode: 201 };
 		} catch (err) {
 			console.log(err);
-			return res.status(400).send();
+			return { failed: true, statusCode: 400 };
 		}
 	}
 }
