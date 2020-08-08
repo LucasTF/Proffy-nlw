@@ -1,7 +1,10 @@
 import express from 'express';
+
 import ClassesController from '../controllers/ClassesController';
 import ConnectionsController from '../controllers/ConnectionsController';
 import AuthController from '../controllers/AuthController';
+
+import authenticateToken from '../middleware/authenticateToken';
 
 const routes = express.Router();
 
@@ -17,6 +20,9 @@ routes.post('/connections', connectionsController.create);
 
 routes.post('/register', (req, res) => authController.create(req, res));
 
-routes.post('/auth', (req, res) => authController.index(req, res));
+routes.get('/auth', authenticateToken, (req, res) =>
+	authController.index(req, res)
+);
+routes.post('/auth', (req, res) => authController.login(req, res));
 
 export default routes;

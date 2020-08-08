@@ -13,6 +13,10 @@ export default class AuthController {
 	}
 
 	index(req: Request, res: Response) {
+		return res.status(200).json(req.user);
+	}
+
+	login(req: Request, res: Response) {
 		this.loginService.login(req, res);
 	}
 

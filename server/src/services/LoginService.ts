@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import db from '../database/connection';
 
@@ -13,7 +14,7 @@ export default class LoginService {
 		const credentials: ICredentials = req.body;
 		const user = await db('users')
 			.where({ email: credentials.email })
-			.select('password');
+			.select('*');
 
 		if (!user[0]) {
 			return res.status(401).json({
@@ -26,10 +27,16 @@ export default class LoginService {
 			credentials.password,
 			user[0].password
 		);
-		if (isValid)
+		if (isValid) {
+			const accessToken = jwt.sign(
+				{ email: user[0].email, password: user[0].password },
+				process.env.ACCESS_TOKEN_SECRET as string
+			);
+
 			return res
 				.status(200)
-				.json({ email: credentials.email, password: user[0].password });
+				.json({ user: user[0], tokens: { accessToken } });
+		}
 
 		return res.status(401).json({ message: 'Credenciais inválidas!' });
 	}
