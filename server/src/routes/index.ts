@@ -25,4 +25,6 @@ routes.get('/auth', authenticateToken, (req, res) =>
 );
 routes.post('/auth', (req, res) => authController.login(req, res));
 
+routes.post('/resign', (req, res) => authController.resign(req, res));
+
 export default routes;

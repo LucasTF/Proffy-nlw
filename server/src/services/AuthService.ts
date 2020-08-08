@@ -37,15 +37,15 @@ export default class AuthService {
 				password: user[0].password,
 			};
 
-			const accessToken = jwt.sign(
-				validatedUser,
-				process.env.ACCESS_TOKEN_SECRET as string,
-				{ expiresIn: '15s' }
-			);
+			const accessToken = this.generateToken(validatedUser);
 			const refreshToken = jwt.sign(
 				validatedUser,
 				process.env.REFRESH_TOKEN_SECRET as string
 			);
+
+			await db('tokens').insert({
+				token: refreshToken,
+			});
 
 			return {
 				failed: false,
@@ -62,5 +62,37 @@ export default class AuthService {
 			statusCode: 401,
 			response: { message: 'Credenciais inválidas!' },
 		};
+	}
+
+	async resign(refreshToken: string): Promise<IServiceResponse> {
+		const token = await db('tokens').where({ token: refreshToken });
+		if (token[0]) {
+			const newToken = jwt.verify(
+				refreshToken,
+				process.env.REFRESH_TOKEN_SECRET as string,
+				(err, user: any) => {
+					if (err) return { failed: true, statusCode: 403 };
+					const accessToken = this.generateToken({
+						email: user.email,
+						password: user.password,
+					});
+					return {
+						failed: false,
+						statusCode: 200,
+						response: { accessToken },
+					};
+				}
+			);
+			return (newToken as unknown) as IServiceResponse;
+		}
+		return { failed: true, statusCode: 403 };
+	}
+
+	private generateToken(credentials: ICredentials) {
+		return jwt.sign(
+			credentials,
+			process.env.ACCESS_TOKEN_SECRET as string,
+			{ expiresIn: '15s' }
+		);
 	}
 }

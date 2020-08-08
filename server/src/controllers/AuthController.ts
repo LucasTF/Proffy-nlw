@@ -25,6 +25,17 @@ export default class AuthController {
 		return res.sendStatus(auth.statusCode);
 	}
 
+	async resign(req: Request, res: Response) {
+		const resignToken = await this.authService.resign(req.body.token);
+
+		if (resignToken.response)
+			return res
+				.status(resignToken.statusCode)
+				.json(resignToken.response);
+
+		return res.sendStatus(resignToken.statusCode);
+	}
+
 	async create(req: Request, res: Response) {
 		const register = await this.registrationService.register(req.body);
 
