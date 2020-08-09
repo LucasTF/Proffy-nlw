@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../containers/Home';
 import Teachers from '../containers/Teachers';
 import TeachersForm from '../containers/TeachersForm';
+import Login from '../containers/Login';
 
 function Routes() {
 	return (
@@ -10,7 +11,8 @@ function Routes() {
 			<Switch>
 				<Route path='/study' component={Teachers} />
 				<Route path='/give-classes' component={TeachersForm} />
-				<Route path='/' component={Home} />
+				<Route path='/home' component={Home} />
+				<Route path='/' component={Login} />
 			</Switch>
 		</BrowserRouter>
 	);
