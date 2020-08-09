@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
         --color-button-text: #FFFFFF;
         --color-box-base: #FFFFFF;
         --color-box-footer: #FAFAFC;
+        --color-button-disabled: #dcdce5;
 
         font-size: 60%;
     }
@@ -51,6 +52,10 @@ export const GlobalStyle = createGlobalStyle`
     button {
         font: 500 1.6rem Poppins;
         color: var(--color-text-base);
+    }
+
+    a {
+        text-decoration: none;
     }
 
     .container {
