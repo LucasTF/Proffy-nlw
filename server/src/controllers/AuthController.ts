@@ -25,6 +25,20 @@ export default class AuthController {
 		return res.sendStatus(auth.statusCode);
 	}
 
+	async logout(req: Request, res: Response) {
+		if (!req.body.refreshToken) return res.sendStatus(400);
+
+		const logoutStatus = await this.authService.logout(
+			req.body.refreshToken
+		);
+		if (logoutStatus.response)
+			return res
+				.status(logoutStatus.statusCode)
+				.json(logoutStatus.response);
+
+		return res.sendStatus(logoutStatus.statusCode);
+	}
+
 	async resign(req: Request, res: Response) {
 		const resignToken = await this.authService.resign(req.body.token);
 

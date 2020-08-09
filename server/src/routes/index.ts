@@ -23,8 +23,8 @@ routes.post('/register', (req, res) => authController.create(req, res));
 routes.get('/auth', authenticateToken, (req, res) =>
 	authController.index(req, res)
 );
-routes.post('/auth', (req, res) => authController.login(req, res));
-
-routes.post('/resign', (req, res) => authController.resign(req, res));
+routes.post('/auth/login', (req, res) => authController.login(req, res));
+routes.post('/auth/logout', (req, res) => authController.logout(req, res));
+routes.post('/auth/resign', (req, res) => authController.resign(req, res));
 
 export default routes;

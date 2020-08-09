@@ -64,6 +64,16 @@ export default class AuthService {
 		};
 	}
 
+	async logout(refreshToken: string): Promise<IServiceResponse> {
+		try {
+			await db('tokens').where({ token: refreshToken }).del();
+			return { failed: false, statusCode: 204 };
+		} catch (err) {
+			console.log(err);
+			return { failed: true, statusCode: 400 };
+		}
+	}
+
 	async resign(refreshToken: string): Promise<IServiceResponse> {
 		const token = await db('tokens').where({ token: refreshToken });
 		if (token[0]) {
@@ -92,7 +102,7 @@ export default class AuthService {
 		return jwt.sign(
 			credentials,
 			process.env.ACCESS_TOKEN_SECRET as string,
-			{ expiresIn: '15s' }
+			{ expiresIn: '30s' }
 		);
 	}
 }
