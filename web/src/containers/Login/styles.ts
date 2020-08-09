@@ -6,8 +6,12 @@ export const Container = styled.main`
 
 	display: flex;
 
+	aside {
+		display: none;
+	}
+
 	.login {
-		width: 50%;
+		width: 100%;
 		display: grid;
 		grid-template-columns: 100%;
 		grid-template-rows: auto 10%;
@@ -19,7 +23,7 @@ export const Container = styled.main`
 			align-items: center;
 
 			.login-container {
-				width: 50%;
+				width: 80%;
 
 				.login-title {
 					margin-bottom: 3rem;
@@ -57,7 +61,7 @@ export const Container = styled.main`
 							}
 
 							label {
-								margin-left: 2rem;
+								padding-left: 2rem;
 							}
 						}
 
@@ -92,7 +96,6 @@ export const Container = styled.main`
 		.login-footer {
 			display: flex;
 			justify-content: space-around;
-			margin: 0 12rem;
 
 			.register a {
 				font-weight: bold;
@@ -109,6 +112,24 @@ export const Container = styled.main`
 				img {
 					margin-left: 1rem;
 				}
+			}
+		}
+	}
+
+	@media (min-width: 1100px) {
+		aside {
+			display: flex;
+		}
+
+		.login {
+			width: 50%;
+
+			.login-body .login-container {
+				width: 50%;
+			}
+
+			.login-footer {
+				margin: 0 12rem;
 			}
 		}
 	}
