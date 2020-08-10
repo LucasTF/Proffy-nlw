@@ -6,7 +6,7 @@ export const Container = styled.aside`
 	width: 50%;
 
 	background-color: var(--color-primary);
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 
@@ -30,5 +30,9 @@ export const Container = styled.aside`
 				color: var(--color-text-in-primary);
 			}
 		}
+	}
+
+	@media (min-width: 1100px) {
+		display: flex;
 	}
 `;

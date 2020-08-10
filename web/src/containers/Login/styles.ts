@@ -6,10 +6,6 @@ export const Container = styled.main`
 
 	display: flex;
 
-	aside {
-		display: none;
-	}
-
 	.login {
 		width: 100%;
 		display: grid;
@@ -22,72 +18,30 @@ export const Container = styled.main`
 			justify-content: center;
 			align-items: center;
 
-			.login-container {
-				width: 80%;
+			.login-extras {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				margin-top: 3rem;
+				color: var(--color-text-complement);
 
-				.login-title {
-					margin-bottom: 3rem;
-					font-size: 3.5rem;
-					font-weight: bold;
-					color: var(--color-text-title);
-				}
-				.login-form {
+				.remember-container {
 					display: flex;
-					flex-direction: column;
+					align-items: center;
 
-					& > input {
-						height: 72px;
-						border: 1px solid var(--color-line-in-white);
-						border-radius: 0 0 8px 8px;
-						padding-left: 2.5rem;
+					label {
+						padding-left: 2rem;
 					}
+				}
 
-					& > input:first-child {
-						border-bottom: none;
-						border-radius: 8px 8px 0 0;
-					}
+				a {
+					margin-top: 3rem;
+					color: var(--color-text-complement);
+					cursor: pointer;
 
-					.login-extras {
-						display: flex;
-						justify-content: space-between;
-						margin: 3rem 0;
-						color: var(--color-text-complement);
-
-						.remember-container {
-							display: flex;
-							align-items: center;
-
-							#remember-me {
-							}
-
-							label {
-								padding-left: 2rem;
-							}
-						}
-
-						a {
-							color: var(--color-text-complement);
-							cursor: pointer;
-
-							&:hover {
-								color: var(--color-text-base);
-							}
-						}
-					}
-
-					button {
-						height: 56px;
-						border: none;
-						border-radius: 8px;
-						background: var(--color-button-disabled);
-						color: var(--color-text-complement);
-						cursor: pointer;
-						transition: background-color 0.3s;
-
-						&:hover {
-							color: var(--color-button-text);
-							background: var(--color-secundary-dark);
-						}
+					&:hover {
+						color: var(--color-text-base);
 					}
 				}
 			}
@@ -117,15 +71,16 @@ export const Container = styled.main`
 	}
 
 	@media (min-width: 1100px) {
-		aside {
-			display: flex;
-		}
-
 		.login {
 			width: 50%;
 
-			.login-body .login-container {
-				width: 50%;
+			.login-body .login-extras {
+				flex-direction: row;
+				justify-content: space-between;
+
+				a {
+					margin-top: 0;
+				}
 			}
 
 			.login-footer {
