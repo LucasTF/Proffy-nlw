@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { Container } from './styles';
 
 import LogoAside from '../../components/LogoAside';
-
-import HeartIcon from '../../assets/images/icons/purple-heart.svg';
 import LoginInput, { LoginInputPosition } from '../../components/LoginInput';
 import AuthForm from '../../components/AuthForm';
 
+import HeartIcon from '../../assets/images/icons/purple-heart.svg';
+
 const Login: React.FC = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [remember, setRemember] = useState(false);
+
 	function loginSubmitHandler(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		console.log({ email, password, remember });
 	}
 
 	return (
@@ -29,11 +34,15 @@ const Login: React.FC = () => {
 							placeholder='E-mail'
 							position={LoginInputPosition.TOP}
 							type='email'
+							onChange={e => setEmail(e.target.value)}
+							value={email}
 						/>
 						<LoginInput
 							placeholder='Senha'
 							position={LoginInputPosition.BOTTOM}
 							type='password'
+							onChange={e => setPassword(e.target.value)}
+							value={password}
 						/>
 						<div className='login-extras'>
 							<div className='remember-container'>
@@ -41,6 +50,10 @@ const Login: React.FC = () => {
 									type='checkbox'
 									name='remember-me'
 									id='remember-me'
+									onChange={() =>
+										setRemember(state => !state)
+									}
+									value={String(remember)}
 								/>
 								<label htmlFor='remember-me'>Lembrar-me</label>
 							</div>
