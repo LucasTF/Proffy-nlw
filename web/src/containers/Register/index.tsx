@@ -1,24 +1,38 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
 
 import LogoAside from '../../components/LogoAside';
 import LoginInput, { LoginInputPosition } from '../../components/LoginInput';
 import AuthForm from '../../components/AuthForm';
+import * as registerService from '../../services/RegisterService';
 
 import BackIcon from '../../assets/images/icons/back.svg';
 
 const Register: React.FC = () => {
+	const history = useHistory();
+
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [cpassword, setCpassword] = useState('');
 
-	function registerSubmitionHandler(e: React.FormEvent<HTMLFormElement>) {
+	async function registerSubmitionHandler(
+		e: React.FormEvent<HTMLFormElement>
+	) {
 		e.preventDefault();
-		console.log('Clicked');
+		const statusCode = await registerService.register({
+			name,
+			surname,
+			email,
+			password,
+		});
+		if (statusCode !== 201)
+			return alert('Erro ao tentar realizar o cadastro!');
+
+		return history.push('/register-success');
 	}
 
 	return (
